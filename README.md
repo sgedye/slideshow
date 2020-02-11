@@ -1,2 +1,3 @@
 # slideshow
-Desktop slideshow with autoplay button
+
+[View the desktop slideshow](https://sgedye.github.io/slideshow/) with autoplay button.

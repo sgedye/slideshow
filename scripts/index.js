@@ -1,3 +1,20 @@
+/* Adding slides and dots to the HTML */
+const slides = document.getElementById("slides")
+const dots = document.querySelector(".dots")
+const slideData = [ { id: 1, src: "cuba_1.jpg" }, { id: 2, src: "cuba_2.jpg" }, { id: 3, src: "cuba_3.jpg" }, { id: 4, src: "cuba_4.jpg" }, { id: 5, src: "cuba_5.jpg" }, { id: 6, src: "cuba_6.jpg" }, { id: 7, src: "cuba_7.jpg" }, { id: 8, src: "cuba_8.jpg" }, { id: 9, src: "cuba_9.jpg" }, { id: 10, src: "cuba_10.jpg" }, { id: 11, src: "cuba_11.jpg" }, { id: 12, src: "cuba_12.jpg" } ]
+const numSlides = slideData.length
+slideData.forEach(item => {
+  const slide = document.createElement('div')
+  slide.classList.add('my-slides', 'fade')
+  slide.innerHTML = `
+    <div class="number-text">${item.id} / ${numSlides}</div>
+      <img src="./pics/${item.src}" width=100% />
+    </div>
+  `
+  slides.appendChild(slide)
+  dots.innerHTML += `<span class="dot" onclick="currentSlide(${item.id})"></span>`
+})
+
 /* Javascript to create the slideshow effect with automation & buttons */
 let slideIndex = 1;
 showSlides(slideIndex);
@@ -50,17 +67,17 @@ const box = document.getElementById("chk");
     dots[autoIndex-1].classList.add("active");
     autoIndex++;
     slideIndex = autoIndex;
-  setTimeout(autoTransition, 10000); // Change image every 10 seconds
+  setTimeout(autoTransition, 8000); // Change image every 8 seconds
   }
 }
 
 function clicked() {
   const box = document.getElementById("chk");
   if (box.checked) {
-    document.getElementById("chk").checked = false;
+    box.checked = false;
   }
   else {
-    document.getElementById("chk").checked = true;
+    box.checked = true;
     autoTransition();
   }
 }

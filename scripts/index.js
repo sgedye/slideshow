@@ -7,77 +7,49 @@ slideData.forEach(item => {
   const slide = document.createElement('div')
   slide.classList.add('my-slides', 'fade')
   slide.innerHTML = `
-    <div class="number-text">${item.id} / ${numSlides}</div>
-      <img src="./pics/${item.src}" width=100% />
-    </div>
+  <div class="number-text">${item.id} / ${numSlides}</div>
+  <img src="./pics/${item.src}" width=100% />
+  </div>
   `
   slides.appendChild(slide)
-  dots.innerHTML += `<span class="dot" onclick="currentSlide(${item.id})"></span>`
+  dots.innerHTML += `<span id="dot_${item.id}" class="dot" onclick="showSlides(${item.id})"></span>`
 })
 
 /* Javascript to create the slideshow effect with automation & buttons */
-let slideIndex = 1;
-showSlides(slideIndex);
-autoTransition();
+showSlides(1); // Show the first image
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
+function getSlideId() {
+  const currentSlide = document.querySelector('.active')
+  return Number(currentSlide.id.replace(/\D+/, ''))
 }
 
-function currentSlide(n) {
-  showSlides(slideIndex = n);
+function arrowNavigation(direction) {
+  const currentSlide = getSlideId()
+  showSlides(currentSlide + direction);
 }
 
-function showSlides(n) {
-  const slides = document.getElementsByClassName("my-slides");
-  const dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {
-    slideIndex = 1
+function showSlides(slideToShow) {
+  let slideIndex = slideToShow % numSlides;
+  if (slideIndex === 0) {
+    slideIndex = numSlides
   }
-  if (n < 1) {
-    slideIndex = slides.length
+  for (let i = 0; i < numSlides; i++) {
+    slides.children[i].style.display = "none";
+    dots.children[i].classList.remove("active");
   }
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-  }
-  for (let i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
+  slides.children[slideIndex-1].style.display = "block";  
+  dots.children[slideIndex-1].classList.add("active");
 }
+
+const box = document.getElementById("chk");
 
 function autoTransition() {
-const box = document.getElementById("chk");
-  if (box.checked)  
-  {
-    const slides = document.getElementsByClassName("my-slides");
-    const dots = document.getElementsByClassName("dot");
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";  
-    }
-    let autoIndex = slideIndex;
-    if (autoIndex > slides.length) {
-      autoIndex = 1;
-    }
-    for (let i = 0; i < dots.length; i++) {
-      dots[i].classList.remove("active");
-    }
-    slides[autoIndex-1].style.display = "block";  
-    dots[autoIndex-1].classList.add("active");
-    autoIndex++;
-    slideIndex = autoIndex;
-  setTimeout(autoTransition, 8000); // Change image every 8 seconds
+  if (box.checked) {
+    const currentSlide = getSlideId()
+    showSlides(currentSlide + 1)
   }
 }
 
-function clicked() {
-  const box = document.getElementById("chk");
-  if (box.checked) {
-    box.checked = false;
-  }
-  else {
-    box.checked = true;
-    autoTransition();
-  }
-}
+const clicked = () => box.checked = !box.checked;
+
+setInterval(autoTransition, 8000);

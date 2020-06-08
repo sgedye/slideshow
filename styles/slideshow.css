@@ -97,20 +97,20 @@ html {
 }
 
 /* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
+@media only screen and (max-width: 600px) {
   .prev, .next, .text { font-size: 11px }
 }
 
 /*  Switch for the automation of the slideshow  */
 .autoplay {
+  display: inline-block;
   position: absolute;
   cursor: pointer;
-  background-color: rgba(999,999,999,0.5);
+  background-color: rgba(255,255,255,0.5);
   border-radius: 34px;
   bottom: 15px;
   width: 185px;
   right: 15px;
-  display: inline-block;
   height: 34px;
 }
 .autoplay:hover {

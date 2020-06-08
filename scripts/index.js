@@ -50,6 +50,10 @@ function autoTransition() {
   }
 }
 
-const clicked = () => box.checked = !box.checked;
+const playPause = document.getElementById('play-pause')
 
+const clicked = () => {
+  playPause.innerHTML = box.checked ? `<i class="fa fa-play"></i>` : `<i class="fa fa-pause"></i>`
+  box.checked = !box.checked;
+}
 setInterval(autoTransition, 8000);

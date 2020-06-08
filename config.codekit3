@@ -187,6 +187,16 @@
 		"sC": 3,
 		"tS": 0
 		},
+	"/styles/slideshow-min.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/styles/slideshow-min-min.css",
+		"oF": 0,
+		"oS": 3
+		},
 	"/styles/slideshow.css": {
 		"aP": 1,
 		"bl": 0,
